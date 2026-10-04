@@ -1,21 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class Living : MonoBehaviour
 {
+    [SerializeField] private CurrentState currentState;
     [SerializeField] private int life;
+    [SerializeField, Range(0,1)] private float stunResistance;
+    [SerializeField, Range(0,1)] private float pushResistance;
 
-    public void GetDamaged(DamageData damageData)
+    public void GetDamaged(Hit hitData)
     {
-        life -= damageData.damage;
+        life -= hitData.damage;
 
-        if (TryGetComponent(out Stunable s))
+        if (hitData.stunTime >= 0)
         {
-            StartCoroutine(s.Stun(damageData.stunTime));
+            StartCoroutine(Stun(hitData.stunTime * (1 - stunResistance)));
         }
 
-        if (TryGetComponent(out Rigidbody rb)) {
-            Vector3 forceVector = (transform.position - damageData.collider.transform.position).normalized;
-            rb.AddForce(forceVector * damageData.force, ForceMode.Impulse);
+        if (hitData.pushForce >= 0 && TryGetComponent(out Rigidbody rb)) {
+            rb.AddForce(hitData.pushForce * (1 - pushResistance) * hitData.direction, ForceMode.Impulse);
         }
 
         if (life <= 0)
@@ -27,5 +30,12 @@ public class Living : MonoBehaviour
     public void Die()
     {
         Destroy(gameObject, 0.5f);
+    }
+
+    IEnumerator Stun(float duration)
+    {
+        currentState.state = State.Stunned;
+        yield return new WaitForSeconds(duration);
+        currentState.state = State.Targgeting;
     }
 }
