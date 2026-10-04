@@ -130,7 +130,6 @@ GameObject:
   - component: {fileID: 204207113}
   - component: {fileID: 204207116}
   - component: {fileID: 204207115}
-  - component: {fileID: 204207114}
   m_Layer: 0
   m_Name: Compass
   m_TagString: Untagged
@@ -154,28 +153,6 @@ Transform:
   - {fileID: 1378269525}
   m_Father: {fileID: 1758510404}
   m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
---- !u!64 &204207114
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 204207112}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &204207115
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -622,8 +599,10 @@ GameObject:
   - component: {fileID: 833271648}
   - component: {fileID: 833271655}
   - component: {fileID: 833271653}
-  - component: {fileID: 833271652}
+  - component: {fileID: 833271656}
   - component: {fileID: 833271654}
+  - component: {fileID: 833271652}
+  - component: {fileID: 833271657}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -741,7 +720,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovent
   target: {fileID: 1758510400}
   attackDistance: 3
-  currentActivity: 2
 --- !u!195 &833271653
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -786,7 +764,7 @@ Rigidbody:
   m_GameObject: {fileID: 833271647}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 1
+  m_LinearDamping: 5
   m_AngularDamping: 1
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -804,6 +782,31 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &833271656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833271647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcedf3d82518905deb4535c1ce5c8b6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CurrentState
+  state: 2
+--- !u!114 &833271657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833271647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ac338b7e5b5e35f9ae26ef05a5b62c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stunable
 --- !u!1 &1369171213
 GameObject:
   m_ObjectHideFlags: 0
@@ -961,7 +964,6 @@ GameObject:
   - component: {fileID: 1378269525}
   - component: {fileID: 1378269528}
   - component: {fileID: 1378269527}
-  - component: {fileID: 1378269526}
   m_Layer: 0
   m_Name: North
   m_TagString: Untagged
@@ -984,27 +986,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 204207113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1378269526
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1378269524}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1378269527
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1073,7 +1054,6 @@ GameObject:
   - component: {fileID: 1497453888}
   - component: {fileID: 1497453891}
   - component: {fileID: 1497453890}
-  - component: {fileID: 1497453889}
   m_Layer: 0
   m_Name: North
   m_TagString: Untagged
@@ -1096,27 +1076,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1854394358}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1497453889
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1497453887}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &1497453890
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1320,7 +1279,6 @@ MonoBehaviour:
   cameraReference: {fileID: 330585545}
   movementSpeed: 5
   rotationSpeed: 5
-  currentActivity: 0
 --- !u!1 &1854394357
 GameObject:
   m_ObjectHideFlags: 0
@@ -1332,7 +1290,6 @@ GameObject:
   - component: {fileID: 1854394358}
   - component: {fileID: 1854394361}
   - component: {fileID: 1854394360}
-  - component: {fileID: 1854394359}
   m_Layer: 0
   m_Name: Compass
   m_TagString: Untagged
@@ -1356,28 +1313,6 @@ Transform:
   - {fileID: 1497453888}
   m_Father: {fileID: 833271651}
   m_LocalEulerAnglesHint: {x: 0, y: -135, z: 0}
---- !u!64 &1854394359
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854394357}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1854394360
 MeshRenderer:
   m_ObjectHideFlags: 0

@@ -127,4 +127,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageData
   damageCollider: {fileID: 7529669047538212587}
   damage: 1
-  force: 10
+  force: 30
+  stunTime: 1

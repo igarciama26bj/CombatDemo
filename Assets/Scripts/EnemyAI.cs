@@ -2,55 +2,37 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(CurrentState))]
 public class EnemyAI : MonoBehaviour
 {
-    private NavMeshAgent nma;
+    private NavMeshAgent navMeshAgent;
+    private CurrentState currentState;
 
     [SerializeField] GameObject target;
     [SerializeField] float attackDistance;
-    [SerializeField] EntityActivity currentActivity;
 
     void Start()
     {
-        nma = GetComponent<NavMeshAgent>();
-        nma.stoppingDistance = attackDistance;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.stoppingDistance = attackDistance;
+        currentState = GetComponent<CurrentState>();
     }
 
     void FixedUpdate()
     {
-        switch (currentActivity)
+        switch (currentState.state)
         {
-            case EntityActivity.Targgeting:
+            case State.Targgeting:
                 Targgeting();
                 break;
-            case EntityActivity.Stunned:
+            case State.Stunned:
+                navMeshAgent.destination = transform.position;
                 break;
         }
     }
 
     void Targgeting()
     {
-        if (Vector3.Distance(gameObject.transform.position, target.transform.position) > attackDistance)
-        {
-            nma.destination = target.transform.position;
-        }
-    }
-
-    void Stunned()
-    {
-        if (TryGetComponent(out NavMeshAgent nma))
-        {
-            nma.enabled = false;
-            Invoke(nameof(UnStun), 2);
-        }
-    }
-
-    void UnStun()
-    {
-        if (TryGetComponent(out NavMeshAgent nma))
-        {
-            nma.enabled = true;
-            currentActivity = EntityActivity.Targgeting;
-        }
+        navMeshAgent.destination = target.transform.position;
     }
 }

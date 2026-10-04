@@ -8,7 +8,6 @@ public class PlayerControlls : MonoBehaviour
     [SerializeField] private Camera cameraReference;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] EntityActivity currentActivity;
 
     private Vector3 movementDirection;
 

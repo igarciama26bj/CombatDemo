@@ -1,4 +1,4 @@
-public enum EntityActivity
+public enum State
 {
     Idle,
     Patrolling,
