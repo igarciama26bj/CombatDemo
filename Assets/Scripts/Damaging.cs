@@ -10,21 +10,21 @@ public class Damaging : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Living living))
+        if (other.TryGetComponent(out HitManager hitManager))
         {
-            switch (directionType)
-            {
-                case DirectionOption.FromCenterOut:
-                    living.GetDamaged(new(damage, stunTime, force, (other.transform.position - transform.position).normalized));
-                    break;
-                case DirectionOption.FromCenterIn:
-                    living.GetDamaged(new(damage, stunTime, force, (transform.position - other.transform.position).normalized));
-                    break;
-                case DirectionOption.Custom:
-                    living.GetDamaged(new(damage, stunTime, force, direction.normalized));
-                    break;
-            }
+            hitManager.GetHit(new(damage, stunTime, force, GetDirection(other), GetComponent<Collider>()));
         }
+    }
+
+    private Vector3 GetDirection(Collider other)
+    {
+        return directionType switch
+        {
+            DirectionOption.FromCenterOut => (other.transform.position - transform.position).normalized,
+            DirectionOption.FromCenterIn => (transform.position - other.transform.position).normalized,
+            DirectionOption.Custom => direction.normalized,
+            _ => direction.normalized
+        };
     }
 
     private enum DirectionOption

@@ -537,9 +537,12 @@ GameObject:
   - component: {fileID: 833271648}
   - component: {fileID: 833271655}
   - component: {fileID: 833271653}
-  - component: {fileID: 833271656}
-  - component: {fileID: 833271654}
   - component: {fileID: 833271652}
+  - component: {fileID: 833271656}
+  - component: {fileID: 833271657}
+  - component: {fileID: 833271654}
+  - component: {fileID: 833271659}
+  - component: {fileID: 833271658}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -691,10 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfe98882564b220cbee89946a098082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Living
-  currentState: {fileID: 833271656}
-  life: 10
-  stunResistance: 0
-  pushResistance: 0
+  HP: 100
+  damageResistance: 0
 --- !u!54 &833271655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -735,6 +736,83 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CurrentState
   state: 2
+--- !u!114 &833271657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833271647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c60706f53f2248309059609634d8e5f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HitReceiver
+  onHitTaken:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 833271654}
+        m_TargetAssemblyTypeName: Living, Assembly-CSharp
+        m_MethodName: GetHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 833271659}
+        m_TargetAssemblyTypeName: Stunnable, Assembly-CSharp
+        m_MethodName: GetHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 833271658}
+        m_TargetAssemblyTypeName: Pushable, Assembly-CSharp
+        m_MethodName: GetHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &833271658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833271647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7a11f0dd8d9c0adbb5697162bb7913c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pushable
+  pushResistance: 0
+--- !u!114 &833271659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 833271647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a50ed40736155052e807314a8fb545b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stunnable
+  stunResistance: 0
 --- !u!1 &1369171213
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,7 +1151,6 @@ GameObject:
   - component: {fileID: 1758510403}
   - component: {fileID: 1758510402}
   - component: {fileID: 1758510401}
-  - component: {fileID: 1758510405}
   - component: {fileID: 1758510408}
   - component: {fileID: 1758510409}
   m_Layer: 0
@@ -1179,22 +1256,6 @@ Transform:
   - {fileID: 204207113}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &1758510405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1758510400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfe98882564b220cbee89946a098082, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Life
-  currentState: {fileID: 0}
-  life: 10
-  stunResistance: 0
-  pushResistance: 0
 --- !u!114 &1758510408
 MonoBehaviour:
   m_ObjectHideFlags: 0

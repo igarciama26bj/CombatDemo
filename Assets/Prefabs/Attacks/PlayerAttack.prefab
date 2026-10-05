@@ -129,4 +129,4 @@ MonoBehaviour:
   direction: {x: 0, y: 0, z: 1}
   damage: 1
   force: 10
-  stunTime: 0.5
+  stunTime: 3
