@@ -1,10 +1,12 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Damaging : MonoBehaviour
 {
     [SerializeField] private DirectionOption directionType;
     [SerializeField] private Vector3 direction;
-    [SerializeField] private int damage;
+    [SerializeField] private List<SerializableDamageByType> damages;
     [SerializeField] private float force;
     [SerializeField] private float stunTime;
 
@@ -12,7 +14,13 @@ public class Damaging : MonoBehaviour
     {
         if (other.TryGetComponent(out HitManager hitManager))
         {
-            hitManager.GetHit(new(damage, stunTime, force, GetDirection(other), GetComponent<Collider>()));
+            Hit hit = hitManager.GetHit(new(
+                damages.ToDictionary(d => d.damageType, d => d.value),
+                stunTime,
+                force,
+                GetDirection(other),
+                GetComponent<Collider>()
+            ));
         }
     }
 

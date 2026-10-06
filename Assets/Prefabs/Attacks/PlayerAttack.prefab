@@ -127,6 +127,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DamageData
   directionType: 0
   direction: {x: 0, y: 0, z: 1}
-  damage: 1
+  damages:
+  - damageType: 0
+    value: 1
+  - damageType: 1
+    value: 3
   force: 10
   stunTime: 3

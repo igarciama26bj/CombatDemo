@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class Pushable : MonoBehaviour, IHitGetter
+public class ForceGetter : MonoBehaviour, IHitGetter
 {
     private Rigidbody rigidBody;
 
@@ -14,12 +14,10 @@ public class Pushable : MonoBehaviour, IHitGetter
 
     public void GetHit(Hit hit)
     {
-        if (hit.pushForce > 0)
-        {
-            hit.pushForce -= pushResistance;
-            if (hit.pushForce < 0) hit.pushForce = 0;
-            Push(hit.pushForce, hit.direction);
-        }
+        hit.pushForce -= pushResistance;
+        if (hit.pushForce < 0)
+            hit.pushForce = 0;
+        Push(hit.pushForce, hit.direction);
     }
 
     private void Push(float pushForce, Vector3 direction)

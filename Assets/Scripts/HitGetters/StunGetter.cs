@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(CurrentState))]
-public class Stunnable : MonoBehaviour, IHitGetter
+public class StunGetter : MonoBehaviour, IHitGetter
 {
     private CurrentState currentState;
     [SerializeField] private float stunResistance;
