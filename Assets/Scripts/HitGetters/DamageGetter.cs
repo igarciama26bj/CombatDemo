@@ -1,17 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
 public class DamageGetter : MonoBehaviour, IHitGetter
 {
     [SerializeField] private int HP;
-    [SerializeField] private List<SerializableDamageByType> damageResistances;
+    [SerializedDictionary("Damage Type", "Resistance")] public SerializedDictionary<DamageType, int> resistances;
 
     public void GetHit(Hit hit)
     {
-        Dictionary<DamageType, int> resistances = damageResistances.ToDictionary(d => d.damageType, d => d.value);
-        
-        foreach (var damageType in resistances.Keys)
+        foreach (var damageType in hit.damages.Keys)
         {
             if (resistances.TryGetValue(damageType, out int resistance))
             {

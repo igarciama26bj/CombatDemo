@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using AYellowpaper.SerializedCollections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Damaging : MonoBehaviour
 {
     [SerializeField] private DirectionOption directionType;
     [SerializeField] private Vector3 direction;
-    [SerializeField] private List<SerializableDamageByType> damages;
+    [SerializedDictionary("Damage Type", "Damage")] public SerializedDictionary<DamageType, int> damages;
     [SerializeField] private float force;
     [SerializeField] private float stunTime;
 
@@ -15,13 +17,21 @@ public class Damaging : MonoBehaviour
         if (other.TryGetComponent(out HitManager hitManager))
         {
             Hit hit = hitManager.GetHit(new(
-                damages.ToDictionary(d => d.damageType, d => d.value),
+                CloneDamages(),
                 stunTime,
                 force,
                 GetDirection(other),
                 GetComponent<Collider>()
             ));
         }
+    }
+
+    private Dictionary<DamageType, int> CloneDamages()
+    {
+        Dictionary<DamageType, int> d = new();
+        foreach (var type in damages.Keys)
+            d[type] = damages[type];
+        return d;
     }
 
     private Vector3 GetDirection(Collider other)
@@ -40,5 +50,5 @@ public class Damaging : MonoBehaviour
         FromCenterOut,
         FromCenterIn,
         Custom
-    } 
+    }
 }

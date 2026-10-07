@@ -695,9 +695,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Living
   HP: 100
-  damageResistances:
-  - damageType: 0
-    value: 0
+  resistances:
+    _serializedList: []
 --- !u!54 &833271655
 Rigidbody:
   m_ObjectHideFlags: 0
