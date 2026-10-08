@@ -26,13 +26,15 @@ public class EnemyAI : MonoBehaviour
                 Targgeting();
                 break;
             case State.Stunned:
-                navMeshAgent.destination = transform.position;
+                if (navMeshAgent.enabled)
+                    navMeshAgent.destination = transform.position;
                 break;
         }
     }
 
     void Targgeting()
     {
-        navMeshAgent.destination = target.transform.position;
+        if (navMeshAgent.enabled)
+            navMeshAgent.destination = target.transform.position;
     }
 }

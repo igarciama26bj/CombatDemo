@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ForceGetter : MonoBehaviour, IHitGetter
+public class ForceReceiver : MonoBehaviour, IHitGetter
 {
     private Rigidbody rigidBody;
 

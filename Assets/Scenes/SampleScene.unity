@@ -694,9 +694,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfe98882564b220cbee89946a098082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Living
-  HP: 100
-  resistances:
-    _serializedList: []
+  HP: 50
+  damageResistances: {fileID: 11400000, guid: 6061575862440c0c8b0b92aa7413feb8, type: 2}
 --- !u!54 &833271655
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -800,7 +799,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a11f0dd8d9c0adbb5697162bb7913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  pushResistance: 0
+  pushResistance: 5
 --- !u!114 &833271659
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,7 +1270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControlls
   cameraReference: {fileID: 330585545}
   movementSpeed: 5
-  rotationSpeed: 5
+  rotationSpeed: 10
   attack: {fileID: 2197099180071017851, guid: 0d6bc258cad4769f58e45ce9ae66a5e8, type: 3}
 --- !u!114 &1758510409
 MonoBehaviour:

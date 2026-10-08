@@ -125,11 +125,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d55a7601414e5c85b938f597d399c559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageData
-  directionType: 0
-  direction: {x: 0, y: 0, z: 1}
-  damages:
-    _serializedList:
-    - Key: 0
-      Value: 5
-  force: 10
-  stunTime: 3
+  hit: {fileID: 11400000, guid: 679c4dd7d027484e5a4bde123bcbe9d5, type: 2}
