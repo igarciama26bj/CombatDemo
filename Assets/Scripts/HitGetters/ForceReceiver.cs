@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class ForceReceiver : MonoBehaviour, IHitGetter
+public class ForceReceiver : MonoBehaviour, IHitReceiver
 {
     private Rigidbody rigidBody;
 
@@ -18,6 +18,7 @@ public class ForceReceiver : MonoBehaviour, IHitGetter
         if (hit.pushForce < 0)
             hit.pushForce = 0;
         Push(hit.pushForce, hit.direction);
+        print($"new force {hit.pushForce}");
     }
 
     private void Push(float pushForce, Vector3 direction)

@@ -3,25 +3,32 @@ using UnityEngine;
 public class HitDealer : MonoBehaviour
 {
     public HitOS hit;
-    public GameObject owner;
+    private GameObject owner;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out HitManager hitManager))
         {
             Hit hitFeedback = new(
+                owner,
                 hit.GetDamages(),
                 hit.stunTime,
                 hit.force,
                 hit.GetDirection(transform.position, other.transform.position),
                 GetComponent<Collider>()
             );
-            hitManager.ReceiverHit(hitFeedback);
+            hitManager.ReceiveHit(hitFeedback);
 
             if (owner.TryGetComponent(out Rigidbody r))
             {
-                r.AddForce((hit.force - hitFeedback.pushForce) * -transform.forward);
+                print($"Push back {hit.force}!");
+                r.AddForce(5 * -transform.right, ForceMode.Impulse);
             }
         }
+    }
+
+    public void SetOwner(GameObject owner)
+    {
+        this.owner = owner;
     }
 }

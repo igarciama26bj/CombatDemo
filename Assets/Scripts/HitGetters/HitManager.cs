@@ -1,16 +1,15 @@
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class HitManager : MonoBehaviour
 {
-    public UnityEvent<Hit> onHitTaken;
     public readonly List<IHitResistor> hitResistors = new();
 
-    public void ReceiverHit(Hit hit)
+    public void ReceiveHit(Hit hit)
     {
         foreach (IHitResistor hitResistor in hitResistors)
             hitResistor.ResistHit(hit);
-        onHitTaken.Invoke(hit);
+        foreach (var receiver in GetComponents<IHitReceiver>())
+            receiver.GetHit(hit);
     }
 }

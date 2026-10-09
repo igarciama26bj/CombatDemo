@@ -2,7 +2,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class DamageReceiver : MonoBehaviour, IHitGetter
+public class DamageReceiver : MonoBehaviour, IHitReceiver
 {
     [SerializeField] private int HP;
     [SerializeField] private DamageResistancesSO damageResistances;

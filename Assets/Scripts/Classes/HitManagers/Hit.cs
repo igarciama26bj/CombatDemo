@@ -4,6 +4,7 @@ using UnityEngine;
 
 public struct Hit
 {
+    public GameObject owner;
     public Dictionary<DamageType, int> damages;
     public float stunTime;
     public float pushForce;
@@ -13,8 +14,9 @@ public struct Hit
 
     public readonly int TotalDamage => damages.Values.Sum();
 
-    public Hit(Dictionary<DamageType, int> damages, float stunTime, float pushForce, Vector3 direction, Collider collider)
+    public Hit(GameObject owner, Dictionary<DamageType, int> damages, float stunTime, float pushForce, Vector3 direction, Collider collider)
     {
+        this.owner = owner;
         this.damages = damages;
         this.stunTime = stunTime;
         this.pushForce = pushForce;
@@ -25,6 +27,7 @@ public struct Hit
 
     public Hit(Dictionary<DamageType, int> damages, float stunTime, float pushForce, Vector3 direction, Collider collider, List<HitResult> results)
     {
+        this.owner = null;
         this.damages = damages;
         this.stunTime = stunTime;
         this.pushForce = pushForce;
