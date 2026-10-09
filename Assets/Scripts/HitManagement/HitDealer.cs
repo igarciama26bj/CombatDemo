@@ -18,11 +18,11 @@ public class HitDealer : MonoBehaviour
                 GetComponent<Collider>()
             );
             hitManager.ReceiveHit(hitFeedback);
+            hitFeedback.owner = null;
 
-            if (owner.TryGetComponent(out Rigidbody r))
+            if (owner.TryGetComponent(out ForceReceiver fr))
             {
-                print($"Push back {hit.force}!");
-                r.AddForce(5 * -transform.right, ForceMode.Impulse);
+                fr.Push((hit.force - hitFeedback.pushForce) * -transform.right);
             }
         }
     }

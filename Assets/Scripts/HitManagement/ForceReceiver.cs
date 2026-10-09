@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(HitManager))]
 [RequireComponent(typeof(Rigidbody))]
 public class ForceReceiver : MonoBehaviour, IHitReceiver
 {
@@ -12,17 +13,16 @@ public class ForceReceiver : MonoBehaviour, IHitReceiver
         rigidBody = GetComponent<Rigidbody>();
     }
 
-    public void GetHit(Hit hit)
+    public void ReciveHit(Hit hit)
     {
         hit.pushForce -= pushResistance;
         if (hit.pushForce < 0)
             hit.pushForce = 0;
-        Push(hit.pushForce, hit.direction);
-        print($"new force {hit.pushForce}");
+        Push(hit.pushForce * hit.direction);
     }
 
-    private void Push(float pushForce, Vector3 direction)
+    public void Push(Vector3 push)
     {
-        rigidBody.AddForce(pushForce * direction, ForceMode.Impulse);
+        rigidBody.AddForce(push, ForceMode.Impulse);
     }
 }

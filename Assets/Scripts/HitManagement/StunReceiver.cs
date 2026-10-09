@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(HitManager))]
 [RequireComponent(typeof(CurrentState))]
 public class StunReceiver : MonoBehaviour, IHitReceiver
 {
@@ -12,7 +13,7 @@ public class StunReceiver : MonoBehaviour, IHitReceiver
         currentState = GetComponent<CurrentState>();
     }
 
-    public void GetHit(Hit hit)
+    public void ReciveHit(Hit hit)
     {
         if (hit.stunTime > 0)
         {
@@ -22,7 +23,7 @@ public class StunReceiver : MonoBehaviour, IHitReceiver
         }
     }
 
-    IEnumerator Stun(float duration)
+    public IEnumerator Stun(float duration)
     {
         currentState.state = State.Stunned;
         yield return new WaitForSeconds(duration);
