@@ -721,7 +721,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &833271656
 MonoBehaviour:
@@ -760,7 +760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a11f0dd8d9c0adbb5697162bb7913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  pushResistance: 5
+  pushResistance: 0
 --- !u!114 &833271659
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588a223d7ca5f6c6895f52e64ed7a842, type: 3}
   m_Name: PlayerHit
   m_EditorClassIdentifier: Assembly-CSharp::HitOS
-  directionType: 0
-  direction: {x: 0, y: 0, z: 0}
+  direction: 0
+  arc: 10
   damages:
     _serializedList:
     - Key: 0
-      Value: 10
+      Value: 0
   force: 10
   stunTime: 1

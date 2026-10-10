@@ -14,7 +14,7 @@ public class HitDealer : MonoBehaviour
                 hit.GetDamages(),
                 hit.stunTime,
                 hit.force,
-                hit.GetDirection(transform.position, other.transform.position),
+                hit.GetDirectionVector(transform.position, transform.forward, other.gameObject.transform.position),
                 GetComponent<Collider>()
             );
             hitManager.ReceiveHit(hitFeedback);
