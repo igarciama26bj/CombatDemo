@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerHit
   m_EditorClassIdentifier: Assembly-CSharp::HitOS
   direction: 0
-  arc: 360
+  arc: 180
   damages:
     _serializedList:
     - Key: 0

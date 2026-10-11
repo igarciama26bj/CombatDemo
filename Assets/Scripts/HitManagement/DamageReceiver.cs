@@ -9,6 +9,7 @@ public class DamageReceiver : MonoBehaviour, IHitReceiver
     [SerializeField] private int HP;
     [SerializeField] private DamageResistancesSO damageResistances;
     public UnityEvent<Hit> onDamageReceived;
+    public UnityEvent onDead;
 
     public void ReceiveHit(Hit hit)
     {
@@ -28,14 +29,7 @@ public class DamageReceiver : MonoBehaviour, IHitReceiver
         if (HP <= 0)
         {
             hit.results.Add(HitResult.Died);
-            Die();
+            onDead.Invoke();
         }
-    }
-
-    public void Die()
-    {
-        if (TryGetComponent(out NavMeshAgent nma))
-            nma.enabled = false;
-        Destroy(gameObject, 1f);
     }
 }

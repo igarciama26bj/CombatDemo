@@ -12,7 +12,7 @@ public class PlayerControlls : MonoBehaviour
     [SerializeField] private Camera cameraReference;
     [SerializeField] private float movementSpeed;
     [SerializeField] private float rotationSpeed;
-    [SerializeField] private GameObject attack;
+    [SerializeField] private GameObject playerAttack;
 
     private Vector3 movementDirection;
 
@@ -72,11 +72,11 @@ public class PlayerControlls : MonoBehaviour
     private IEnumerator Attack()
     {
         currentState.state = State.Attacking;
-        GameObject a = Instantiate(attack, gameObject.transform);
-        a.GetComponent<HitDealer>().SetOwner(gameObject);
-        a.transform.Translate(0, 0 ,1.2f);
+        GameObject attack = Instantiate(playerAttack, gameObject.transform);
+        attack.GetComponent<HitDealer>().SetOwner(gameObject);
+        attack.transform.Translate(0, 0, 1.2f);
         yield return new WaitForSeconds(0.4f);
-        Destroy(a);
+        Destroy(attack);
         currentState.state = State.Idle;
     }
 }

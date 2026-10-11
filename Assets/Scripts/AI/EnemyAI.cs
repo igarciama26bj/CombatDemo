@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CurrentState))]
 public class EnemyAI : MonoBehaviour
 {
+    private Rigidbody rigidBody;
     private NavMeshAgent navMeshAgent;
     private CurrentState currentState;
 
@@ -13,9 +15,11 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        rigidBody = GetComponent<Rigidbody>();
         navMeshAgent = GetComponent<NavMeshAgent>();
-        navMeshAgent.stoppingDistance = attackDistance;
         currentState = GetComponent<CurrentState>();
+
+        navMeshAgent.stoppingDistance = attackDistance;
     }
 
     void FixedUpdate()
@@ -36,5 +40,12 @@ public class EnemyAI : MonoBehaviour
     {
         if (navMeshAgent.enabled)
             navMeshAgent.destination = target.transform.position;
+    }
+
+    public void OnDead()
+    {
+        navMeshAgent.enabled = false;
+        rigidBody.freezeRotation = false;
+        Destroy(gameObject, 5f);
     }
 }
