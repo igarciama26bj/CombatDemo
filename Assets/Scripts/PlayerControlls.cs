@@ -74,8 +74,7 @@ public class PlayerControlls : MonoBehaviour
         currentState.state = State.Attacking;
         GameObject a = Instantiate(attack, gameObject.transform);
         a.GetComponent<HitDealer>().SetOwner(gameObject);
-        a.transform.Rotate(0,-90,0);
-        a.transform.Translate(1.2f,0,0);
+        a.transform.Translate(0, 0 ,1.2f);
         yield return new WaitForSeconds(0.4f);
         Destroy(a);
         currentState.state = State.Idle;

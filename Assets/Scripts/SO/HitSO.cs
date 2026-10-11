@@ -5,9 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HitOS", menuName = "Scriptable Objects/HitOS")]
 public class HitOS : ScriptableObject
 {
-    public DirectionOption direction;
+    public DirectionOption direction = DirectionOption.FromCenterOut;
     [Range(0, 360)] public float arc = 360;
-    private float HalfArc => arc/2;
     [SerializedDictionary("Damage Type", "Damage")] public SerializedDictionary<DamageType, int> damages;
     public float force;
     public float stunTime;
@@ -36,11 +35,12 @@ public class HitOS : ScriptableObject
         originForward.Normalize();
         
         float angle = Vector3.SignedAngle(originForward, directionVector, Vector3.up);
-
-        if (Mathf.Abs(angle) > HalfArc)
-        {
-            directionVector = Quaternion.Euler(0, angle > 0 ? angle - HalfArc : angle + HalfArc, 0) * directionVector;
-        }
+        float halfArc = arc / 2;
+        
+        if (angle > halfArc)
+            directionVector = Quaternion.Euler(0, halfArc, 0) * originForward;
+        else if (angle < -halfArc)
+            directionVector = Quaternion.Euler(0, -halfArc, 0) * originForward;
 
         return direction switch
         {
