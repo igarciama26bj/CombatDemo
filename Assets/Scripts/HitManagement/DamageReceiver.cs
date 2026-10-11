@@ -1,14 +1,16 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(HitManager))]
 public class DamageReceiver : MonoBehaviour, IHitReceiver
 {
     [SerializeField] private int HP;
     [SerializeField] private DamageResistancesSO damageResistances;
+    public UnityEvent<Hit> onDamageReceived;
 
-    public void ReciveHit(Hit hit)
+    public void ReceiveHit(Hit hit)
     {
         DamageType[] damages = hit.damages.Keys.ToArray();
         foreach (var damageType in damages)
@@ -21,6 +23,7 @@ public class DamageReceiver : MonoBehaviour, IHitReceiver
             }
             HP -= hit.damages[damageType];
         }
+        onDamageReceived.Invoke(hit);
 
         if (HP <= 0)
         {

@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HitManager : MonoBehaviour
 {
     public readonly List<IHitResistor> hitResistors = new();
+    public UnityEvent<Hit> onHitReceived;
     
     private IHitReceiver[] hitReceivers;
 
@@ -17,6 +19,7 @@ public class HitManager : MonoBehaviour
         foreach (IHitResistor hitResistor in hitResistors)
             hitResistor.ResistHit(hit);
         foreach (IHitReceiver receiver in hitReceivers)
-            receiver.ReciveHit(hit);
+            receiver.ReceiveHit(hit);
+        onHitReceived.Invoke(hit);
     }
 }

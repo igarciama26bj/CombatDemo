@@ -1,4 +1,6 @@
+using UnityEngine.Events;
+
 public interface IHitReceiver
 {
-    public void ReciveHit(Hit hit);
+    public void ReceiveHit(Hit hit);
 }

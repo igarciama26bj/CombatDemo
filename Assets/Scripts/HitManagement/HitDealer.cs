@@ -1,8 +1,11 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class HitDealer : MonoBehaviour
 {
     public HitOS hit;
+    public UnityEvent<Hit> onHitDealt;
+
     private GameObject owner;
 
     void OnTriggerEnter(Collider other)
@@ -18,6 +21,8 @@ public class HitDealer : MonoBehaviour
                 GetComponent<Collider>()
             );
             hitManager.ReceiveHit(hitFeedback);
+            onHitDealt.Invoke(hitFeedback);
+
             hitFeedback.owner = null;
 
             if (owner.TryGetComponent(out ForceReceiver fr))
