@@ -7,27 +7,46 @@ using UnityEngine.Events;
 public class StunReceiver : MonoBehaviour, IHitReceiver
 {
     private CurrentState currentState;
-    [SerializeField] private float stunResistance;
-    public UnityEvent<Hit> onStunReceived;
+    public float stunResistance;
+    public UnityEvent<float> onStunReceived;
 
 
     void Start()
     {
         currentState = GetComponent<CurrentState>();
+        if (TryGetComponent(out HitManager hm) && hm.resistance != null)
+        {
+            stunResistance = hm.resistance.stunResistance;
+        }
     }
 
     public void ReceiveHit(Hit hit)
     {
-        if (hit.stunTime > 0)
+        Stun(ref hit.stunTime);
+    }
+
+    public void Stun(ref float stunTime)
+    {
+        if (stunTime > 0)
         {
-            hit.stunTime -= stunResistance;
-            if (hit.stunTime < 0) hit.stunTime = 0;
-            StartCoroutine(Stun(hit.stunTime));
-            onStunReceived.Invoke(hit);
+            stunTime -= stunResistance;
+            if (stunTime < 0) stunTime = 0;
+            StartCoroutine(StunCountDown(stunTime));
+            onStunReceived.Invoke(stunTime);
         }
     }
 
-    public IEnumerator Stun(float duration)
+    public void Stun(float stunTime)
+    {
+        if (stunTime > 0)
+        {
+            stunTime -= stunResistance;
+            if (stunTime < 0) stunTime = 0;
+            StartCoroutine(StunCountDown(stunTime));
+            onStunReceived.Invoke(stunTime);
+        }
+    }
+    private IEnumerator StunCountDown(float duration)
     {
         currentState.state = State.Stunned;
         yield return new WaitForSeconds(duration);

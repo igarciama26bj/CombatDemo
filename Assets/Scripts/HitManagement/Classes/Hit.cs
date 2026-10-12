@@ -7,8 +7,9 @@ public class Hit
     public GameObject owner;
     public Dictionary<DamageType, int> damages;
     public float stunTime;
-    public float pushForce;
     public Vector3 direction;
+    public bool attached;
+    public float force;
     public Collider collider;
     public List<HitResult> results;
 
@@ -18,16 +19,18 @@ public class Hit
         GameObject owner = null,
         Dictionary<DamageType, int> damages = null,
         float stunTime = 0,
-        float pushForce = 0,
-        Vector3 direction = new(), 
+        Vector3 direction = new(),
+        bool attached = true,
+        float force = 0,
         Collider collider = null,
         List<HitResult> results = null
     ) {
         this.owner = owner;
         this.damages = (damages is null) ? new() : damages;
         this.stunTime = stunTime;
-        this.pushForce = pushForce;
         this.direction = direction;
+        this.attached = attached;
+        this.force = force;
         this.collider = collider;
         this.results = (results is null) ? new() : results;
     }

@@ -1,35 +1,53 @@
+using System.Collections.Generic;
 using System.Linq;
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
-using UnityEngine.AI;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(HitManager))]
 public class DamageReceiver : MonoBehaviour, IHitReceiver
 {
-    [SerializeField] private int HP;
-    [SerializeField] private DamageResistancesSO damageResistances;
-    public UnityEvent<Hit> onDamageReceived;
+    public int HP;
+    [SerializedDictionary("Damage Type", "Resistance")] public SerializedDictionary<DamageType, int> damageResistances;
+    public UnityEvent<Dictionary<DamageType, int>> onDamageReceived;
     public UnityEvent onDead;
+
+    void Start()
+    {
+        if (TryGetComponent(out HitManager hm) && hm.resistance != null)
+        {
+            HP = hm.resistance.HP;
+            damageResistances = hm.resistance.damageResistances;
+        }
+    }
 
     public void ReceiveHit(Hit hit)
     {
-        DamageType[] damages = hit.damages.Keys.ToArray();
-        foreach (var damageType in damages)
-        {
-            if (damageResistances.resistances.TryGetValue(damageType, out int resistance))
-            {
-                hit.damages[damageType] -= resistance;
-                if (hit.damages[damageType] < 0)
-                    hit.damages[damageType] = 0;
-            }
-            HP -= hit.damages[damageType];
-        }
-        onDamageReceived.Invoke(hit);
+        Damage(hit.damages, hit.results);
+    }
 
-        if (HP <= 0)
+    public void Damage(Dictionary<DamageType, int> damages, List<HitResult> results = null)
+    {
+        if (damages != null && damages.Values.Sum() > 0)
         {
-            hit.results.Add(HitResult.Died);
-            onDead.Invoke();
+            DamageType[] damageTypes = damages.Keys.ToArray();
+            foreach (var damageType in damageTypes)
+            {
+                if (damageResistances.TryGetValue(damageType, out int resistance))
+                {
+                    damages[damageType] -= resistance;
+                    if (damages[damageType] < 0)
+                        damages[damageType] = 0;
+                }
+                HP -= damages[damageType];
+            }
+            onDamageReceived.Invoke(damages);
+
+            if (HP <= 0)
+            {
+                results.Add(HitResult.Died);
+                onDead.Invoke();
+            }
         }
     }
 }

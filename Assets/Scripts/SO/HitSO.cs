@@ -5,11 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "HitOS", menuName = "Scriptable Objects/HitOS")]
 public class HitOS : ScriptableObject
 {
+    [SerializedDictionary("Damage Type", "Damage")] public SerializedDictionary<DamageType, int> damages;
+    public float stunTime = 0f;
     public DirectionOption direction = DirectionOption.FromCenterOut;
     [Range(0, 360)] public float arc = 360;
-    [SerializedDictionary("Damage Type", "Damage")] public SerializedDictionary<DamageType, int> damages;
-    public float force;
-    public float stunTime;
+    public bool attached = true;
+    public float force = 0f;
 
     public Dictionary<DamageType, int> GetDamages()
     {

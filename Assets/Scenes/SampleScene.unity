@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 1369171214}
   - component: {fileID: 1369171218}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5784,7 +5784,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a11f0dd8d9c0adbb5697162bb7913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ForceReceiver
-  pushResistance: 0
+  forceResistance: 0
   onForceReceived:
     m_PersistentCalls:
       m_Calls: []
@@ -5800,6 +5800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c60706f53f2248309059609634d8e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitManager
+  resistance: {fileID: 0}
   onHitReceived:
     m_PersistentCalls:
       m_Calls:
@@ -5880,6 +5881,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1778212358982161341, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
+      propertyPath: HP
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3899999824884667491, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5
@@ -5920,9 +5925,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4352953293479499630, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
+      propertyPath: resistance
+      value: 
+      objectReference: {fileID: 11400000, guid: 6061575862440c0c8b0b92aa7413feb8, type: 2}
     - target: {fileID: 6342283993733045666, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 7068967108343243307, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
+      propertyPath: stunResistance
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7629784979745862770, guid: 344e5ce441561b869badc0e04aba7f39, type: 3}
       propertyPath: target

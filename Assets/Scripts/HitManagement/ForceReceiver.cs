@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,25 +8,44 @@ public class ForceReceiver : MonoBehaviour, IHitReceiver
 {
     private Rigidbody rigidBody;
 
-    [SerializeField] private float pushResistance;
-    public UnityEvent<Hit> onForceReceived;
+    public float forceResistance;
+    public UnityEvent<float, Vector3> onForceReceived;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
+        if (TryGetComponent(out HitManager hm) && hm.resistance != null)
+        {
+            forceResistance = hm.resistance.forceResistance;
+        }
     }
 
     public void ReceiveHit(Hit hit)
     {
-        hit.pushForce -= pushResistance;
-        if (hit.pushForce < 0)
-            hit.pushForce = 0;
-        Push(hit.pushForce * hit.direction);
-        onForceReceived.Invoke(hit);
+        Push(ref hit.force, hit.direction);
     }
 
-    public void Push(Vector3 push)
+    public void Push(ref float force, Vector3 direction)
     {
-        rigidBody.AddForce(push, ForceMode.Impulse);
+        if (Math.Abs(force) > 0)
+        {
+            force -= forceResistance;
+            if (force < 0)
+                force = 0;
+            rigidBody.AddForce(force * direction, ForceMode.Impulse);
+            onForceReceived.Invoke(force, direction);
+        }
+    }
+
+    public void Push(float force, Vector3 direction)
+    {
+        if (Math.Abs(force) > 0)
+        {
+            force -= forceResistance;
+            if (force < 0)
+                force = 0;
+            rigidBody.AddForce(force * direction, ForceMode.Impulse);
+            onForceReceived.Invoke(force, direction);
+        }
     }
 }

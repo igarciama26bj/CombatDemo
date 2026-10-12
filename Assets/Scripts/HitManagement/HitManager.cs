@@ -4,6 +4,7 @@ using UnityEngine.Events;
 
 public class HitManager : MonoBehaviour
 {
+    public ResistanceSO resistance;
     public readonly List<IHitResistor> hitResistors = new();
     public UnityEvent<Hit> onHitReceived;
     
