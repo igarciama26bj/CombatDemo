@@ -5730,7 +5730,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerControlls
   cameraReference: {fileID: 330585545}
   movementSpeed: 5
-  rotationSpeed: 10
+  rotationSpeed: 6
   playerAttack: {fileID: 2197099180071017851, guid: 0d6bc258cad4769f58e45ce9ae66a5e8, type: 3}
 --- !u!114 &1758510409
 MonoBehaviour:
@@ -5868,6 +5868,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spike Trap
       objectReference: {fileID: 0}
+    - target: {fileID: 7182742831794529519, guid: 486624ca8e67facc19c3827b433b235a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 6fdae3f6d61bedd00991bd5baa1c869c, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

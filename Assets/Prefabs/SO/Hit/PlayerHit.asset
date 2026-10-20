@@ -16,8 +16,8 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value: 5
-  stunTime: 2
+  stunTime: 0
   direction: 0
   arc: 180
   attached: 1
-  force: 10
+  force: 30

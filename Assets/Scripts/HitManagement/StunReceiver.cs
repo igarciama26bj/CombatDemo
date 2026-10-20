@@ -10,14 +10,14 @@ public class StunReceiver : MonoBehaviour, IHitReceiver
     public float stunResistance;
     public UnityEvent<float> onStunReceived;
 
-
     void Start()
     {
         currentState = GetComponent<CurrentState>();
-        if (TryGetComponent(out HitManager hm) && hm.resistance != null)
-        {
-            stunResistance = hm.resistance.stunResistance;
-        }
+    }
+
+    public void ReceiveResistance(ResistanceSO resistance)
+    {
+        stunResistance = resistance.stunResistance;
     }
 
     public void ReceiveHit(Hit hit)
@@ -46,6 +46,7 @@ public class StunReceiver : MonoBehaviour, IHitReceiver
             onStunReceived.Invoke(stunTime);
         }
     }
+    
     private IEnumerator StunCountDown(float duration)
     {
         currentState.state = State.Stunned;

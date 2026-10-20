@@ -20,4 +20,4 @@ MonoBehaviour:
   direction: 0
   arc: 360
   attached: 1
-  force: 20
+  force: 10

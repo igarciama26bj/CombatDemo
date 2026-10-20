@@ -13,6 +13,9 @@ public class HitManager : MonoBehaviour
     void Start()
     {
         hitReceivers = GetComponents<IHitReceiver>();
+        if (resistance != null)
+            foreach (IHitReceiver receiver in hitReceivers)
+                receiver.ReceiveResistance(resistance);
     }
 
     public void ReceiveHit(Hit hit)

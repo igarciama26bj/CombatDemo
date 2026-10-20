@@ -12,13 +12,10 @@ public class DamageReceiver : MonoBehaviour, IHitReceiver
     public UnityEvent<Dictionary<DamageType, int>> onDamageReceived;
     public UnityEvent onDead;
 
-    void Start()
+    public void ReceiveResistance(ResistanceSO resistance)
     {
-        if (TryGetComponent(out HitManager hm) && hm.resistance != null)
-        {
-            HP = hm.resistance.HP;
-            damageResistances = hm.resistance.damageResistances;
-        }
+        HP = resistance.HP;
+        damageResistances = resistance.damageResistances;
     }
 
     public void ReceiveHit(Hit hit)
