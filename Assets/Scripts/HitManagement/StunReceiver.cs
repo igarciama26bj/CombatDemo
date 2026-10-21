@@ -15,9 +15,9 @@ public class StunReceiver : MonoBehaviour, IHitReceiver
         currentState = GetComponent<CurrentState>();
     }
 
-    public void ReceiveResistance(ResistanceSO resistance)
+    public void ReceiveResistances(ResistancesSO resistances)
     {
-        stunResistance = resistance.stunResistance;
+        stunResistance = resistances.stunResistance;
     }
 
     public void ReceiveHit(Hit hit)

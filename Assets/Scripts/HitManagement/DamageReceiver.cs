@@ -12,10 +12,11 @@ public class DamageReceiver : MonoBehaviour, IHitReceiver
     public UnityEvent<Dictionary<DamageType, int>> onDamageReceived;
     public UnityEvent onDead;
 
-    public void ReceiveResistance(ResistanceSO resistance)
+    public void ReceiveResistances(ResistancesSO resistances)
     {
-        HP = resistance.HP;
-        damageResistances = resistance.damageResistances;
+        HP = resistances.HP;
+        damageResistances = resistances.damageResistances;
+        if (HP <= 0) onDead.Invoke();
     }
 
     public void ReceiveHit(Hit hit)

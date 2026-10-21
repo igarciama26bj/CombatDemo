@@ -1,5 +1,5 @@
 public interface IHitReceiver
 {
-    public void ReceiveResistance(ResistanceSO resistance);
+    public void ReceiveResistances(ResistancesSO resistances);
     public void ReceiveHit(Hit hit);
 }

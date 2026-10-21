@@ -5800,7 +5800,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c60706f53f2248309059609634d8e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitManager
-  resistance: {fileID: 0}
+  resistances: {fileID: 0}
   onHitReceived:
     m_PersistentCalls:
       m_Calls:
@@ -5834,7 +5834,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1739408149975141418, guid: 486624ca8e67facc19c3827b433b235a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1739408149975141418, guid: 486624ca8e67facc19c3827b433b235a, type: 3}
       propertyPath: m_LocalRotation.w

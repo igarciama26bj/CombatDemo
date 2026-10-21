@@ -20,9 +20,9 @@ public class ForceReceiver : MonoBehaviour, IHitReceiver
         navMeshAgent = GetComponent<NavMeshAgent>();
     }
 
-    public void ReceiveResistance(ResistanceSO resistance)
+    public void ReceiveResistances(ResistancesSO resistances)
     {
-        forceResistance = resistance.forceResistance;
+        forceResistance = resistances.forceResistance;
     }
 
     public void ReceiveHit(Hit hit)

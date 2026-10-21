@@ -5229,6 +5229,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c60706f53f2248309059609634d8e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HitReceiver
+  resistances: {fileID: 11400000, guid: 6061575862440c0c8b0b92aa7413feb8, type: 2}
   onHitReceived:
     m_PersistentCalls:
       m_Calls:
@@ -5256,8 +5257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bfe98882564b220cbee89946a098082, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Living
-  HP: 50
-  damageResistances: {fileID: 11400000, guid: 6061575862440c0c8b0b92aa7413feb8, type: 2}
+  HP: 0
+  damageResistances:
+    _serializedList: []
   onDamageReceived:
     m_PersistentCalls:
       m_Calls:
@@ -5316,7 +5318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a11f0dd8d9c0adbb5697162bb7913c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Pushable
-  pushResistance: 0
+  forceResistance: 0
   onForceReceived:
     m_PersistentCalls:
       m_Calls: []
