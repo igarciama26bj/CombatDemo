@@ -3,10 +3,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(CurrentState))]
-public class PlayerControlls : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     private CurrentState currentState;
-    private InputAction moveInput;
     private InputAction attackInput;
 
     [SerializeField] private Camera cameraReference;
@@ -14,13 +13,13 @@ public class PlayerControlls : MonoBehaviour
     [SerializeField] private float rotationSpeed;
     [SerializeField] private GameObject playerAttack;
 
+    private Vector2 moveInput = Vector2.zero;
     private Vector3 movementDirection;
 
     void Start()
     {
         movementDirection = transform.forward;
         currentState = GetComponent<CurrentState>();
-        moveInput = InputSystem.actions.FindAction("Move");
         attackInput = InputSystem.actions.FindAction("Attack");
     }
 
@@ -45,10 +44,20 @@ public class PlayerControlls : MonoBehaviour
         }
     }
 
+    private void OnMove(InputAction.CallbackContext callbackContext)
+    {
+        if (callbackContext.phase == InputActionPhase.Started)
+        {
+            moveInput = callbackContext.ReadValue<Vector2>();
+        } else if (callbackContext.phase == InputActionPhase.Canceled)
+        {
+            moveInput = Vector2.zero;
+        }
+    }
+
     private void GetMovementDirection()
     {
-        Vector2 input = moveInput.ReadValue<Vector2>();
-        if (input.magnitude != 0)
+        if (moveInput.magnitude != 0)
         {
             Vector3 cameraForward = cameraReference.transform.forward;
             Vector3 cameraRight = cameraReference.transform.right;
@@ -59,7 +68,7 @@ public class PlayerControlls : MonoBehaviour
             cameraForward.Normalize();
             cameraRight.Normalize();
 
-            movementDirection = cameraForward * input.y + cameraRight * input.x;
+            movementDirection = cameraForward * moveInput.y + cameraRight * moveInput.x;
         }
     }
 
@@ -69,7 +78,7 @@ public class PlayerControlls : MonoBehaviour
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(movementDirection), rotationSpeed * Time.fixedDeltaTime);
         }
-        if (moveInput.ReadValue<Vector2>().magnitude != 0)
+        if (moveInput.magnitude != 0)
         {
             transform.Translate(movementSpeed * Time.fixedDeltaTime * movementDirection, Space.World);
         }
